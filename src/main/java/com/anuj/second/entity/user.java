@@ -16,8 +16,8 @@ public class user {
     @Id
     private String id;
 
-    @Indexed(unique = true)
     @NonNull
+    @Indexed(unique = true)
     private String username;
 
     @NonNull

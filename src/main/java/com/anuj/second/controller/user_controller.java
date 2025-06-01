@@ -22,11 +22,6 @@ public class user_controller {
     @Autowired
     private userrepository repo;
 
-    @GetMapping
-    public List<user> getall(){
-        return svobj.getAll();
-    }
-
     @PutMapping
     public ResponseEntity<?> edituser(@RequestBody user d){
         Authentication auth= SecurityContextHolder.getContext().getAuthentication();
@@ -44,4 +39,11 @@ public class user_controller {
         repo.deleteByusername(auth.getName());
         return new ResponseEntity<>("Deleted",HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping
+    public ResponseEntity<?> greeting(){
+        Authentication auth= SecurityContextHolder.getContext().getAuthentication();
+        return new ResponseEntity<>("Hi "+auth.getName(),HttpStatus.OK);
+    }
+
 }
