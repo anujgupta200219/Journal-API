@@ -3,7 +3,9 @@ package com.anuj.second.api_response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 
@@ -13,8 +15,8 @@ public class WeatherResponse{
 
     private Current current;
 
-    @Data
-    @NoArgsConstructor
+    @Getter
+    @Setter
     public class Current{
         private int temperature;
 

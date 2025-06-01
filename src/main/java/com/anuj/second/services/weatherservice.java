@@ -9,14 +9,14 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class weatherservice {
-    private static final String apikey="";
+    private static final String key="";
     private static final String api="http://api.weatherstack.com/current?access_key=API_KEY&query=CITY";
 
     @Autowired
     private RestTemplate resttemplate;
 
     public WeatherResponse getWeather(String city){
-        String url=api.replace("API_KEY",apikey).replace("CITY",city).replace(" ","%20");
+        String url=api.replace("API_KEY",key).replace("CITY",city).replace(" ","%20");
         ResponseEntity<WeatherResponse> response = resttemplate.exchange(url, HttpMethod.GET, null, WeatherResponse.class);
         return response.getBody();
     }

@@ -51,7 +51,7 @@ public class user_controller {
         WeatherResponse weatherResponse = ws.getWeather("Mumbai");
         String greet="";
         if(weatherResponse != null){
-            greet=" , Weather feels like: "+weatherResponse.getCurrent().getFeelslike();
+            greet=" , Todays Weather feels like: "+weatherResponse.getCurrent().getFeelslike();
         }
         return new ResponseEntity<>("Hi "+auth.getName() + greet,HttpStatus.OK);
     }

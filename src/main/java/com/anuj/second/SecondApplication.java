@@ -25,7 +25,7 @@ public class SecondApplication {
 	}
 
 	@Bean
-	public RestTemplate falana(){
+	public RestTemplate weather(){
 		return new RestTemplate();
 	}
 }
