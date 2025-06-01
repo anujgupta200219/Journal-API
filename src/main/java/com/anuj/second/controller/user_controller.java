@@ -1,8 +1,10 @@
 package com.anuj.second.controller;
 
+import com.anuj.second.api_response.WeatherResponse;
 import com.anuj.second.entity.user;
 import com.anuj.second.repository.userrepository;
 import com.anuj.second.services.userservice;
+import com.anuj.second.services.weatherservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,9 @@ public class user_controller {
 
     @Autowired
     private userrepository repo;
+
+    @Autowired
+    private weatherservice ws;
 
     @PutMapping
     public ResponseEntity<?> edituser(@RequestBody user d){
@@ -43,7 +48,12 @@ public class user_controller {
     @GetMapping
     public ResponseEntity<?> greeting(){
         Authentication auth= SecurityContextHolder.getContext().getAuthentication();
-        return new ResponseEntity<>("Hi "+auth.getName(),HttpStatus.OK);
+        WeatherResponse weatherResponse = ws.getWeather("Mumbai");
+        String greet="";
+        if(weatherResponse != null){
+            greet=" , Weather feels like: "+weatherResponse.getCurrent().getFeelslike();
+        }
+        return new ResponseEntity<>("Hi "+auth.getName() + greet,HttpStatus.OK);
     }
 
 }
