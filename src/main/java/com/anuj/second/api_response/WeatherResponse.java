@@ -15,8 +15,8 @@ public class WeatherResponse{
 
     private Current current;
 
-    @Getter
-    @Setter
+    @Data
+    @NoArgsConstructor
     public class Current{
         private int temperature;
 
