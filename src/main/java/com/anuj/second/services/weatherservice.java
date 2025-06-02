@@ -3,6 +3,7 @@ package com.anuj.second.services;
 import com.anuj.second.api_response.WeatherResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
@@ -29,12 +30,15 @@ public class weatherservice {
 //        String d="{\n" +
 //                "    \"id\":\"1\",\n" +
 //                "    \"username\":\"Anuj\",\n" +
-//                "    \"password\":\"Anujs\"\n" +
+//                "    \"password\":\"Anuj\"\n" +
 //                "}";
 //        HttpEntity<String> httpEntity=new HttpEntity<>(d);
 
+        HttpHeaders httpHeaders=new HttpHeaders();
+        httpHeaders.set("key","value");
+
         UserDetails user = User.builder().username("Anuj").password("Anuj").build();
-        HttpEntity<UserDetails>httpEntity=new HttpEntity<>(user);
+        HttpEntity<UserDetails>httpEntity=new HttpEntity<>(user,httpHeaders);
         ResponseEntity<WeatherResponse> response=resttemplate.exchange(url,HttpMethod.POST,httpEntity,WeatherResponse.class);
         return response.getBody();
     }
