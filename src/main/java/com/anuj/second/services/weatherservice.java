@@ -2,8 +2,11 @@ package com.anuj.second.services;
 
 import com.anuj.second.api_response.WeatherResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,6 +21,21 @@ public class weatherservice {
     public WeatherResponse getWeather(String city){
         String url=api.replace("API_KEY",apikey).replace("CITY",city).replace(" ","%20");
         ResponseEntity<WeatherResponse> response = resttemplate.exchange(url, HttpMethod.GET, null, WeatherResponse.class);
+        return response.getBody();
+    }
+
+    public WeatherResponse postweather(String city){
+        String url=api.replace("API_KEY",apikey).replace("CITY",city).replace(" ","%20");
+//        String d="{\n" +
+//                "    \"id\":\"1\",\n" +
+//                "    \"username\":\"Anuj\",\n" +
+//                "    \"password\":\"Anujs\"\n" +
+//                "}";
+//        HttpEntity<String> httpEntity=new HttpEntity<>(d);
+
+        UserDetails user = User.builder().username("Anuj").password("Anuj").build();
+        HttpEntity<UserDetails>httpEntity=new HttpEntity<>(user);
+        ResponseEntity<WeatherResponse> response=resttemplate.exchange(url,HttpMethod.POST,httpEntity,WeatherResponse.class);
         return response.getBody();
     }
 }
