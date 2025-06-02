@@ -37,7 +37,7 @@ public class weatherservice {
         HttpHeaders httpHeaders=new HttpHeaders();
         httpHeaders.set("key","value");
 
-        UserDetails user = User.builder().username("Anuj").password("Anuj").build();
+        UserDetails user = User.builder().username("anuj").password("anuj").build();
         HttpEntity<UserDetails>httpEntity=new HttpEntity<>(user,httpHeaders);
         ResponseEntity<WeatherResponse> response=resttemplate.exchange(url,HttpMethod.POST,httpEntity,WeatherResponse.class);
         return response.getBody();
