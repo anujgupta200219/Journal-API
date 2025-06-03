@@ -2,6 +2,7 @@ package com.anuj.second.services;
 
 import com.anuj.second.api_response.WeatherResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -13,7 +14,9 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class weatherservice {
-    private static final String apikey="";
+    @Value("${weather_api_key}")
+    private String apikey;
+
     private static final String api="http://api.weatherstack.com/current?access_key=API_KEY&query=CITY";
 
     @Autowired
