@@ -1,5 +1,6 @@
 package com.anuj.second.controller;
 
+import com.anuj.second.cache.Appcache;
 import com.anuj.second.entity.user;
 import com.anuj.second.services.userservice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class admincontroller {
 
     @Autowired
     private userservice svobj;
+
+    @Autowired
+    Appcache app;
 
     @GetMapping("/all-user")
     public  ResponseEntity<?> getallusers(){
@@ -34,5 +38,10 @@ public class admincontroller {
         catch(Exception e){
            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/run-init")
+    public void RunInit(){
+        app.init();
     }
 }

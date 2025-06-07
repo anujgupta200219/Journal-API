@@ -1,6 +1,7 @@
 package com.anuj.second.services;
 
 import com.anuj.second.api_response.WeatherResponse;
+import com.anuj.second.cache.Appcache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -17,19 +18,22 @@ public class weatherservice {
     @Value("${weather_api_key}")
     private String apikey;
 
-    private static final String api="http://api.weatherstack.com/current?access_key=API_KEY&query=CITY";
+//    private static final String api="http://api.weatherstack.com/current?access_key=API_KEY&query=CITY";
 
     @Autowired
     private RestTemplate resttemplate;
 
+    @Autowired
+    private Appcache app;
+
     public WeatherResponse getWeather(String city){
-        String url=api.replace("API_KEY",apikey).replace("CITY",city).replace(" ","%20");
+        String url=app.appcache.get("weather_api").replace("API_KEY",apikey).replace("CITY",city).replace(" ","%20");
         ResponseEntity<WeatherResponse> response = resttemplate.exchange(url, HttpMethod.GET, null, WeatherResponse.class);
         return response.getBody();
     }
 
     public WeatherResponse postweather(String city){
-        String url=api.replace("API_KEY",apikey).replace("CITY",city).replace(" ","%20");
+        String url=app.appcache.get("weather_api").replace("API_KEY",apikey).replace("CITY",city).replace(" ","%20");
 //        String d="{\n" +
 //                "    \"id\":\"1\",\n" +
 //                "    \"username\":\"Anuj\",\n" +

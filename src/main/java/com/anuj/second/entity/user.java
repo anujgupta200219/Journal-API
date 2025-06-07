@@ -23,6 +23,10 @@ public class user {
     @NonNull
     private String password;
 
+    private String email;
+
+    private boolean sanalysis;
+
     @DBRef
     private List<entry> entries=new ArrayList<>();
     private List<String> roles;
