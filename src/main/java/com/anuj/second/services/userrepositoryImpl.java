@@ -1,13 +1,15 @@
-package com.anuj.second.repository;
+package com.anuj.second.services;
 
 import com.anuj.second.entity.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class userrepositoryImpl {
 
 

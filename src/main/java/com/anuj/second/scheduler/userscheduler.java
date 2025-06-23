@@ -2,19 +2,14 @@ package com.anuj.second.scheduler;
 import com.anuj.second.cache.Appcache;
 import com.anuj.second.entity.entry;
 import com.anuj.second.entity.user;
-import com.anuj.second.repository.userrepositoryImpl;
+import com.anuj.second.services.userrepositoryImpl;
 import com.anuj.second.services.emailservice;
 import com.anuj.second.services.sanalysisservice;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.scheduling.support.CronExpression;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class userscheduler {
