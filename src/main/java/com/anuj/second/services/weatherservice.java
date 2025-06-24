@@ -32,21 +32,21 @@ public class weatherservice {
         return response.getBody();
     }
 
-    public WeatherResponse postweather(String city){
-        String url=app.appcache.get("weather_api").replace("API_KEY",apikey).replace("CITY",city).replace(" ","%20");
-//        String d="{\n" +
-//                "    \"id\":\"1\",\n" +
-//                "    \"username\":\"Anuj\",\n" +
-//                "    \"password\":\"Anuj\"\n" +
-//                "}";
-//        HttpEntity<String> httpEntity=new HttpEntity<>(d);
-
-        HttpHeaders httpHeaders=new HttpHeaders();
-        httpHeaders.set("key","value");
-
-        UserDetails user = User.builder().username("anuj").password("anuj").build();
-        HttpEntity<UserDetails>httpEntity=new HttpEntity<>(user,httpHeaders);
-        ResponseEntity<WeatherResponse> response=resttemplate.exchange(url,HttpMethod.POST,httpEntity,WeatherResponse.class);
-        return response.getBody();
+//    public WeatherResponse postweather(String city){
+//        String url=app.appcache.get("weather_api").replace("API_KEY",apikey).replace("CITY",city).replace(" ","%20");
+////        String d="{\n" +
+////                "    \"id\":\"1\",\n" +
+////                "    \"username\":\"Anuj\",\n" +
+////                "    \"password\":\"Anuj\"\n" +
+////                "}";
+////        HttpEntity<String> httpEntity=new HttpEntity<>(d);
+//
+//        HttpHeaders httpHeaders=new HttpHeaders();
+//        httpHeaders.set("key","value");
+//
+//        UserDetails user = User.builder().username("anuj").password("anuj").build();
+//        HttpEntity<UserDetails>httpEntity=new HttpEntity<>(user,httpHeaders);
+//        ResponseEntity<WeatherResponse> response=resttemplate.exchange(url,HttpMethod.POST,httpEntity,WeatherResponse.class);
+//        return response.getBody();
     }
 }
