@@ -1,15 +1,29 @@
 package com.anuj.second.controller;
 
 import com.anuj.second.entity.user;
+import com.anuj.second.services.UserDetailsServiceImpl;
 import com.anuj.second.services.userservice;
+import com.anuj.second.utils.jwtutil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/public")
 public class publiccontroller {
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    private jwtutil jwtutil;
 
     @Autowired
     private userservice svobj;
@@ -19,13 +33,25 @@ public class publiccontroller {
         return "Ok";
     }
 
-    @PostMapping("/create_user")
-    public ResponseEntity<?> saveuser(@RequestBody user d){
+    @PostMapping("/signup")
+    public ResponseEntity<?> signup(@RequestBody user d){
         if(svobj.save_new_user(d)){
             return new ResponseEntity<>(HttpStatus.OK);
         }
         else{
             return new ResponseEntity<>("User already exist",HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/login")
+    public void login(@RequestBody user d) {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(d.getUsername(), d.getPassword()));
+            UserDetails userDetails = userDetailsService.loadUserByUsername(d.getUsername());
+
+        }
+        catch(Exception e){
+
         }
     }
 }
