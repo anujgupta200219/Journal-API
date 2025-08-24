@@ -31,8 +31,7 @@ public class second_controller_v2 {
         String username=auth.getName();
         user u=users.findByUsername(username);
         List<entry> all=u.getEntries();
-        if(all!=null && !all.isEmpty()) return new ResponseEntity<>(all,HttpStatus.OK);
-        else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(all != null ? all : Collections.emptyList(), HttpStatus.OK);
     }
 
     @PostMapping
